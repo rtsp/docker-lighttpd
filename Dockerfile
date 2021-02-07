@@ -1,5 +1,4 @@
-ARG ALPINE_VERSION=3.13
-FROM alpine:${ALPINE_VERSION}
+FROM alpine:3.13
 
 LABEL maintainer="RTSP <docker@rtsp.us>"
 
