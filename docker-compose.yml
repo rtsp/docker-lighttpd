@@ -1,0 +1,10 @@
+version: "2.4"
+
+services:
+  lighttpd:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: lighttpd:dev
+    ports:
+      - 8080:80
