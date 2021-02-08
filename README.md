@@ -17,12 +17,16 @@
 - `/etc/lighttpd/lighttpd.conf` - Default configuration file
 - `/etc/lighttpd/mime-types.conf` - MIME types definition derived from NGINX /etc/nginx/mime.types
 
+Feel free to replace or modify these config files if required!
+
 
 ### Default Config (lighttpd.conf)
 
 - Run as `lighttpd` user
-- Listen on port `80` only
+- Listen on port `80`
 - No SSL/HTTPS (designed to run behind load balancer or reverse proxy server)
+- No log file writing
+- Except HTML files, the Cache-Control header instruct client to cache all static files for 30 days
 
 
 ## Examples
@@ -62,3 +66,8 @@ docker run -d \
 - Publish website to port 8080 of Docker host machine.
 - Enter http://localhost:8080
 
+
+## Links
+
+- [Docker Hub: rtsp/lighttpd](https://hub.docker.com/r/rtsp/lighttpd/)
+- [GitHub: rtsp/docker-lighttpd](https://github.com/rtsp/docker-lighttpd)
