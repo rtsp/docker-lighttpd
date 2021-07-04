@@ -1,8 +1,8 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
 LABEL maintainer="RTSP <docker@rtsp.us>"
 
-ARG LIGHTTPD_VERSION=1.4.57-r0
+ARG LIGHTTPD_VERSION=1.4.59-r0
 RUN set -x \
     && apk add --no-cache \
     lighttpd${LIGHTTPD_VERSION:+=}${LIGHTTPD_VERSION} \
