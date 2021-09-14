@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.14.2
 
 LABEL maintainer="RTSP <docker@rtsp.us>"
 
