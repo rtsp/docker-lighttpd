@@ -1,37 +1,73 @@
-## Welcome to GitHub Pages
+# lighttpd Docker Image
 
-You can use the [editor on GitHub](https://github.com/rtsp/docker-lighttpd/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+- [`lighttpd`](https://www.lighttpd.net/) is a secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments
+- [`docker-lighttpd`](https://hub.docker.com/r/rtsp/lighttpd) is a lighttpd docker image designed to use as **base image** for building frontend/static web app docker image (e.g. [React](https://reactjs.org/))
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Base Image
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Use `docker-lighttpd` as a base image (`FROM`) and copy your web artifacts to `/var/www/html`
+- Optimized for serving high traffic frontend/static web app
 
-```markdown
-Syntax highlighted code block
+## Useful Info
 
-# Header 1
-## Header 2
-### Header 3
+### Paths
 
-- Bulleted
-- List
+- `/var/www/html` - Document root
+- `/etc/lighttpd/lighttpd.conf` - Default configuration file
+- `/etc/lighttpd/mime-types.conf` - MIME types definition derived from NGINX /etc/nginx/mime.types
 
-1. Numbered
-2. List
+Feel free to replace or modify these config files if required!
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
+### Default Config (lighttpd.conf)
+
+- Run as `lighttpd` user
+- Listen on port `80`
+- No SSL/HTTPS (designed to run behind load balancer or reverse proxy server)
+- No log file writing
+- Except HTML files, the Cache-Control header instruct client to cache all static files for 30 days
+
+
+## Examples
+
+### Dockerize React App (Multi-Stage Build)
+
+```
+FROM node:14 AS builder
+
+COPY package.json \
+     package-lock.json \
+     /usr/web/
+
+WORKDIR /usr/web/
+RUN npm ci
+
+COPY public/ /usr/web/public/
+COPY src/ /usr/web/src/
+RUN npm run build
+
+FROM rtsp/lighttpd
+COPY --from=builder /usr/web/build/ /var/www/html/
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+### Directly use as Web Server (Volume mount)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rtsp/docker-lighttpd/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```
+docker run -d \
+  --name your-webapp \
+  -v /webapp/dir:/var/www/html:ro \
+  -p 8080:80 \
+  rtsp/lighttpd
+```
 
-### Support or Contact
+- Mount /webapp/dir as your web app document root
+- Publish website to port 8080 of Docker host machine.
+- Enter http://localhost:8080
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+## Links
+
+- [Docker Hub: rtsp/lighttpd](https://hub.docker.com/r/rtsp/lighttpd/)
+- [GitHub: rtsp/docker-lighttpd](https://github.com/rtsp/docker-lighttpd)
