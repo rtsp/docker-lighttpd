@@ -1,11 +1,11 @@
-FROM alpine:3.14.2
+FROM alpine:3.15.0
 
 LABEL org.opencontainers.image.title="Lighttpd"
 LABEL org.opencontainers.image.authors="RTSP <docker@rtsp.us>"
 LABEL org.opencontainers.image.source="https://github.com/rtsp/docker-lighttpd"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 
-ARG LIGHTTPD_VERSION=1.4.59-r0
+ARG LIGHTTPD_VERSION=1.4.61-r1
 
 RUN set -x \
     && apk add --no-cache \
