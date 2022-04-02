@@ -1,4 +1,4 @@
-FROM alpine:3.15.0
+FROM alpine:3.15.3
 
 LABEL org.opencontainers.image.title="Lighttpd"
 LABEL org.opencontainers.image.authors="RTSP <docker@rtsp.us>"
