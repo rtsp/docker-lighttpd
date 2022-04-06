@@ -1,0 +1,19 @@
+version: 2
+
+updates:
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "rtsp"
+    assignees:
+      - "rtsp"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "rtsp"
+    assignees:
+      - "rtsp"
