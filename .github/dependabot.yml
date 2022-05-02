@@ -5,6 +5,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+      time: "09:00"
+      timezone: "Asia/Bangkok"
     reviewers:
       - "rtsp"
     assignees:
@@ -13,6 +15,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "saturday"
+      time: "09:00"
+      timezone: "Asia/Bangkok"
     reviewers:
       - "rtsp"
     assignees:
