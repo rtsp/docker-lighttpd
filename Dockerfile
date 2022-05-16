@@ -15,7 +15,7 @@ RUN set -x \
     && rm -rvf /etc/lighttpd/* /etc/logrotate.d/lighttpd /var/log/lighttpd /var/www/localhost \
     && mkdir -vp /var/www/html
 
-COPY files/lighttpd/* /etc/lighttpd/
+COPY files/lighttpd/ /etc/lighttpd/
 
 EXPOSE 80/tcp
 
