@@ -3,10 +3,7 @@ name: Publish Docker image
 on:
   release:
     types: [published]
-  workflow_dispatch:
-    inputs:
-      tag:
-        required: false
+  workflow_dispatch: {}
 
 jobs:
   push_to_registries:
@@ -48,6 +45,10 @@ jobs:
           images: |
             ${{ secrets.DOCKER_REPO }}
             ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{version}}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.0.0
