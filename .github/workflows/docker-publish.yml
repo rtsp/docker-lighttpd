@@ -46,7 +46,7 @@ jobs:
             ${{ secrets.DOCKER_REPO }}
             ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=tag
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=semver,pattern={{version}}
