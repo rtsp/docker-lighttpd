@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.authors="RTSP <docker@rtsp.us>"
 LABEL org.opencontainers.image.source="https://github.com/rtsp/docker-lighttpd"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 
-ARG LIGHTTPD_VERSION=1.4.70-r0
+ARG LIGHTTPD_VERSION=1.4.71-r0
 
 RUN set -x \
     && apk add --no-cache \
