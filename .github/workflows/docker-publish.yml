@@ -37,7 +37,6 @@ jobs:
         with:
           images: |
             ${{ secrets.DOCKER_REPO }}
-            ghcr.io/${{ github.repository }}
           tags: |
             type=ref,event=tag
             type=semver,pattern={{major}}.{{minor}}
