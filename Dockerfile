@@ -16,8 +16,9 @@ RUN set -x \
     && mkdir -vp /var/www/html
 
 COPY files/lighttpd/ /etc/lighttpd/
+COPY docker-entrypoint.sh /usr/bin
+RUN ["chmod", "+x", "/usr/bin/docker-entrypoint.sh"]
 
 EXPOSE 80/tcp
 
-ENTRYPOINT ["/usr/sbin/lighttpd"]
-CMD ["-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
