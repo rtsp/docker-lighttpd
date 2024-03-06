@@ -19,6 +19,4 @@ COPY files/lighttpd/ /etc/lighttpd/
 COPY docker-entrypoint.sh /usr/bin
 RUN ["chmod", "+x", "/usr/bin/docker-entrypoint.sh"]
 
-EXPOSE 80/tcp
-
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]

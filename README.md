@@ -1,7 +1,7 @@
 # lighttpd Docker Image
 
 - [`lighttpd`](https://www.lighttpd.net/) is a secure, fast, compliant, and very flexible web-server that has been optimized for high-performance environments
-- [`docker-lighttpd`](https://hub.docker.com/r/rtsp/lighttpd) is a lighttpd docker image designed to use as **base image** for building frontend/static web app docker image (e.g. [React](https://reactjs.org/))
+- [`docker-lighttpd`](https://hub.docker.com/r/bzz445/lighttpd) is a lighttpd docker image designed to use as **base image** for building frontend/static web app docker image (e.g. [React](https://reactjs.org/))
 
 ## Base Image
 
@@ -24,9 +24,9 @@ Feel free to replace or modify these config files if required!
 ### Default Config (lighttpd.conf)
 
 - Run as `lighttpd` user
-- Listen on port `80`
+- Deafault listen on port `80`
 - No SSL/HTTPS (designed to run behind load balancer or reverse proxy server)
-- No log file writing
+- Logs writing to stdout
 - No Cache-Control header
 
 ## Examples
@@ -47,7 +47,7 @@ COPY public/ /usr/web/public/
 COPY src/ /usr/web/src/
 RUN npm run build
 
-FROM rtsp/lighttpd
+FROM bzz445/lighttpd
 COPY --from=builder /usr/web/build/ /var/www/html/
 ```
 
@@ -58,7 +58,18 @@ docker run -d \
   --name your-webapp \
   -v /webapp/dir:/var/www/html:ro \
   -p 8080:80 \
-  rtsp/lighttpd
+  bzz445/lighttpd
+```
+
+### Directly use as Web Server on custom port (Volume mount)
+
+```
+docker run -d \
+  --name your-webapp \
+  -v /webapp/dir:/var/www/html:ro \
+  -p 8080:8070 \
+  -e PORT=8070 \
+  bzz445/lighttpd
 ```
 
 - Mount /webapp/dir as your web app document root
@@ -67,5 +78,5 @@ docker run -d \
 
 ## Links
 
-- [Docker Hub: rtsp/lighttpd](https://hub.docker.com/r/rtsp/lighttpd/)
-- [GitHub: rtsp/docker-lighttpd](https://github.com/rtsp/docker-lighttpd)
+- [Docker Hub: bzz445/lighttpd](https://hub.docker.com/r/bzz445/lighttpd/)
+- [GitHub: bzz445/lighttpd-for-react](https://github.com/bzz445/lighttpd-for-react)
